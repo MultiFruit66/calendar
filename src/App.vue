@@ -2,80 +2,81 @@
   <div id="app">
     <div id="calendar">
       <header>
-        <span class="btn" @click="previousMonth">&#60</span>
-        <span>{{months[currentMonth].toUpperCase()}}</span>
-        <span>{{currentYear}}</span>
-        <span class="btn" @click="nextMonth">></span>
+        <span class="btn" @click="previousMonth">&lt;</span>
+        <span>{{ months[currentMonth].toUpperCase() }}</span>
+        <span>{{ currentYear }}</span>
+        <span class="btn" @click="nextMonth">&gt;</span>
       </header>
       <main>
         <ul>
-          <li>пн</li>
-          <li>вт</li>
-          <li>ср</li>
-          <li>чт</li>
-          <li>пт</li>
-          <li>сб</li>
-          <li>вс</li>
-          <li v-for="day in startFrom" :key="day - 10"></li>
-          <li v-for="day in countOfDays" :key="day">{{day}}</li>
+          <li v-for="(day, index) in days" :key="`a${index}`">
+            {{ day }}
+          </li>
+          <li v-for="(day, index) in startFrom" :key="`b${index}`"></li>
+          <li v-for="(day, index) in countOfDays" :key="`c${index}`">
+            {{ day }}
+          </li>
         </ul>
       </main>
-      <Main />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "app",
-  data() {
-    return {
-      currentMonth: new Date().getMonth(),
-      currentYear: new Date().getFullYear(),
-      months: [
-        "январь",
-        "февраль",
-        "март",
-        "апрель",
-        "май",
-        "июнь",
-        "июль",
-        "август",
-        "сентябрь",
-        "октябрь",
-        "ноябрь",
-        "декабрь"
-      ]
-    };
-  },
+  name: 'App',
+
+  data: () => ({
+    currentMonth: new Date().getMonth(),
+    currentYear: new Date().getFullYear(),
+    days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
+    months: [
+      'январь',
+      'февраль',
+      'март',
+      'апрель',
+      'май',
+      'июнь',
+      'июль',
+      'август',
+      'сентябрь',
+      'октябрь',
+      'ноябрь',
+      'декабрь',
+    ],
+  }),
+
   methods: {
-    nextMonth() {
-      ++this.currentMonth;
+    nextMonth () {
+      this.currentMonth += 1
+
       if (this.currentMonth > 11) {
-        this.currentMonth = 0;
-        ++this.currentYear;
+        this.currentMonth = 0
+        this.currentYear += 1
       }
     },
-    previousMonth() {
-      --this.currentMonth;
+
+    previousMonth () {
+      this.currentMonth -= 1
+
       if (this.currentMonth < 0) {
-        this.currentMonth = 11;
-        --this.currentYear;
+        this.currentMonth = 11
+        this.currentYear -= 1
       }
-    }
-  },
-  computed: {
-    startFrom() {
-      let day = new Date(this.currentYear, this.currentMonth).getDay();
-      return day === 0 ? 6 : day - 1;
     },
+  },
+
+  computed: {
+    startFrom () {
+      let day = new Date(this.currentYear, this.currentMonth).getDay()
+      return day === 0 ? 6 : day - 1
+    },
+
     countOfDays() {
-      return (
-        new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
-      );
-    }
-  }
-};
+      return new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
+    },
+  },
+}
 </script>
 
 <style lang="scss">
@@ -101,11 +102,13 @@ header {
   padding: 20px;
   text-align: center;
   background: #ccc;
+
   span {
     user-select: none;
     display: inline-block;
     width: 80px;
     text-align: center;
+
     &:nth-child(3) {
       text-align: right;
     }
@@ -114,6 +117,7 @@ header {
 
 .btn {
   width: 50px;
+
   &:hover {
     transition: 0.3s;
     transform: scale(1.6);
@@ -127,6 +131,7 @@ ul {
   grid-gap: 2vw;
   height: 400px;
   padding: 15px;
+
   li {
     text-align: center;
   }
