@@ -134,6 +134,11 @@ ul {
 
   li {
     text-align: center;
+
+    &:nth-child(7n),
+    &:nth-child(7n - 1) {
+      color: red;
+    }
   }
 }
 </style>
