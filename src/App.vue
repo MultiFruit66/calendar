@@ -102,7 +102,7 @@ body {
 
 #app {
   width: 100vw;
-  height: -webkit-fill-available;
+  min-height: -webkit-fill-available;
   display: flex;
   font-size: 22px;
   transition: 0.7s;
@@ -136,7 +136,7 @@ header {
 }
 
 .btn {
-  width: 50px;
+  width: 40px;
 
   &:hover {
     transition: 0.3s;
