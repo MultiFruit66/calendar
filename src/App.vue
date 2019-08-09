@@ -66,6 +66,13 @@ export default {
         this.currentMonth = 11;
         this.currentYear -= 1;
       }
+    },
+
+    preloadImg(list) {
+      list.forEach(url => {
+        let img = new Image();
+        img.src = url;
+      });
     }
   },
 
@@ -80,6 +87,10 @@ export default {
         new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
       );
     }
+  },
+
+  created() {
+    this.preloadImg(this.background);
   }
 };
 </script>
