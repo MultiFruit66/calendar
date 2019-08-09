@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{background: `url(${background[Math.floor((currentMonth+1)/3)]})`}">
     <div id="calendar">
       <header>
         <span class="btn" @click="previousMonth">&lt;</span>
@@ -9,13 +9,9 @@
       </header>
       <main>
         <ul>
-          <li v-for="(day, index) in days" :key="`a${index}`">
-            {{ day }}
-          </li>
+          <li v-for="(day, index) in days" :key="`a${index}`">{{ day }}</li>
           <li v-for="(day, index) in startFrom" :key="`b${index}`"></li>
-          <li v-for="(day, index) in countOfDays" :key="`c${index}`">
-            {{ day }}
-          </li>
+          <li v-for="(day, index) in countOfDays" :key="`c${index}`">{{ day }}</li>
         </ul>
       </main>
     </div>
@@ -24,59 +20,68 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
 
   data: () => ({
     currentMonth: new Date().getMonth(),
     currentYear: new Date().getFullYear(),
-    days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
+    days: ["пн", "вт", "ср", "чт", "пт", "сб", "вс"],
     months: [
-      'январь',
-      'февраль',
-      'март',
-      'апрель',
-      'май',
-      'июнь',
-      'июль',
-      'август',
-      'сентябрь',
-      'октябрь',
-      'ноябрь',
-      'декабрь',
+      "январь",
+      "февраль",
+      "март",
+      "апрель",
+      "май",
+      "июнь",
+      "июль",
+      "август",
+      "сентябрь",
+      "октябрь",
+      "ноябрь",
+      "декабрь"
     ],
+    background: [
+      require("./assets/winter.jpg"),
+      require("./assets/spring.jpg"),
+      require("./assets/summer.jpg"),
+      require("./assets/autumn.jpg"),
+      require("./assets/winter.jpg")
+    ]
   }),
 
   methods: {
-    nextMonth () {
-      this.currentMonth += 1
+    nextMonth() {
+      this.currentMonth += 1;
 
       if (this.currentMonth > 11) {
-        this.currentMonth = 0
-        this.currentYear += 1
+        this.currentMonth = 0;
+        this.currentYear += 1;
       }
     },
 
-    previousMonth () {
-      this.currentMonth -= 1
+    previousMonth() {
+      this.currentMonth -= 1;
 
       if (this.currentMonth < 0) {
-        this.currentMonth = 11
-        this.currentYear -= 1
+        this.currentMonth = 11;
+        this.currentYear -= 1;
       }
-    },
+    }
   },
 
   computed: {
-    startFrom () {
-      let day = new Date(this.currentYear, this.currentMonth).getDay()
-      return day === 0 ? 6 : day - 1
+    startFrom() {
+      let day = new Date(this.currentYear, this.currentMonth).getDay();
+      return day === 0 ? 6 : day - 1;
     },
 
     countOfDays() {
-      return new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
-    },
-  },
-}
+      return (
+        new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
+      );
+    }
+  }
+};
 </script>
 
 <style lang="scss">
@@ -89,24 +94,28 @@ body {
   height: -webkit-fill-available;
   display: flex;
   font-size: 22px;
+  transition: 0.7s;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #calendar {
   margin: auto;
-  background: #eee;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
+  border: 1px solid #000;
 }
 
 header {
   border-radius: 10px 10px 0 0;
   padding: 20px;
   text-align: center;
-  background: #ccc;
+  background: rgba(200, 200, 200, 0.9);
 
   span {
     user-select: none;
     display: inline-block;
-    width: 80px;
+    width: 90px;
     text-align: center;
 
     &:nth-child(3) {
