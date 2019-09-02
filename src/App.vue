@@ -1,5 +1,9 @@
 <template>
-  <div id="app" :style="{background: `url(${background[Math.floor((currentMonth+1)/3)]})`}">
+  <div id="app" 
+    :style="{
+      background: `url(${currentBackground})`, 
+      opacity: opacity
+    }">
     <div id="calendar">
       <header>
         <span class="btn" @click="previousMonth">&lt;</span>
@@ -20,79 +24,96 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
 
   data: () => ({
     currentMonth: new Date().getMonth(),
     currentYear: new Date().getFullYear(),
-    days: ["пн", "вт", "ср", "чт", "пт", "сб", "вс"],
+
+    days: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
+
     months: [
-      "январь",
-      "февраль",
-      "март",
-      "апрель",
-      "май",
-      "июнь",
-      "июль",
-      "август",
-      "сентябрь",
-      "октябрь",
-      "ноябрь",
-      "декабрь"
+      'январь',
+      'февраль',
+      'март',
+      'апрель',
+      'май',
+      'июнь',
+      'июль',
+      'август',
+      'сентябрь',
+      'октябрь',
+      'ноябрь',
+      'декабрь'
     ],
-    background: [
-      require("./assets/winter.jpg"),
-      require("./assets/spring.jpg"),
-      require("./assets/summer.jpg"),
-      require("./assets/autumn.jpg"),
-      require("./assets/winter.jpg")
-    ]
+
+    backgrounds: [
+      require('./assets/winter.jpg'),
+      require('./assets/spring.jpg'),
+      require('./assets/summer.jpg'),
+      require('./assets/autumn.jpg'),
+      require('./assets/winter.jpg')
+    ],
+    
+    opacity: 0
   }),
 
   methods: {
     nextMonth() {
-      this.currentMonth += 1;
+      this.currentMonth += 1
 
       if (this.currentMonth > 11) {
-        this.currentMonth = 0;
-        this.currentYear += 1;
+        this.currentMonth = 0
+        this.currentYear += 1
       }
     },
 
     previousMonth() {
-      this.currentMonth -= 1;
+      this.currentMonth -= 1
 
       if (this.currentMonth < 0) {
-        this.currentMonth = 11;
-        this.currentYear -= 1;
+        this.currentMonth = 11
+        this.currentYear -= 1
       }
     },
 
-    preloadImg(list) {
-      list.forEach(url => {
-        let img = new Image();
-        img.src = url;
-      });
+    preloadImg(url, onload) {
+      let img = new Image()
+      img.src = url
+
+      if (onload) {
+        img.onload = () => this.opacity = 1
+      }
     }
   },
 
   computed: {
     startFrom() {
-      let day = new Date(this.currentYear, this.currentMonth).getDay();
-      return day === 0 ? 6 : day - 1;
+      let day = new Date(this.currentYear, this.currentMonth).getDay()
+      return day === 0 ? 6 : day - 1
     },
 
     countOfDays() {
       return (
         new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
-      );
+      )
+    },
+
+    currentBackground() {
+      return (
+        this.backgrounds[Math.floor((this.currentMonth+1)/3)]
+      )
     }
   },
 
   created() {
-    this.preloadImg(this.background);
+    const backgrounds = this.backgrounds
+    backgrounds.forEach(url => {
+      this.preloadImg(url)
+    })
+    this.preloadImg(this.currentBackground, true)
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -105,7 +126,7 @@ body {
   min-height: -webkit-fill-available;
   display: flex;
   font-size: 22px;
-  transition: 0.7s;
+  transition: .7s;
   background-repeat: no-repeat;
   background-size: cover;
 }
