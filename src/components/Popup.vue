@@ -57,7 +57,8 @@ export default {
 }
 
 .yearPopup {
-  padding: 0 0 10px 10px;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 input {
@@ -73,13 +74,13 @@ input {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  padding: 0;
+  padding: 0 0 10px;
   margin: 0;
 }
 
 .month {
   margin: auto;
-  width: 90px;
+  width: 30%;
 
   &:hover {
     text-decoration: underline;

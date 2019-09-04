@@ -34,7 +34,7 @@ header {
 }
 
 .data {
-  width: 100px;
+  width: 110px;
   text-align: center;
 
   &:hover {
