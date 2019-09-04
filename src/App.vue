@@ -27,6 +27,8 @@
           :days="days"
           :startFrom="startFrom"
           :countOfDays="countOfDays"
+          :currentMonth="currentMonth" 
+          :currentYear="currentYear"
         />
       </main>
     </div>
