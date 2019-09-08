@@ -122,11 +122,24 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
     this.preloadImg(this.currentBackground, true)
 
     const backgrounds = this.backgrounds
     backgrounds.forEach(url => this.preloadImg(url))
+
+    window.addEventListener('keydown', event => {
+      switch (event.keyCode) {
+        case 37: this.previousMonth() 
+          break
+        case 38: this.currentYear += 1 
+          break
+        case 39: this.nextMonth() 
+          break
+        case 40: this.currentYear -= 1 
+          break
+      }
+    })
   }
 }
 </script>
