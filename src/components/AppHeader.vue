@@ -1,8 +1,8 @@
 <template>
   <header>
     <span class="btn" @click="$emit('previousMonth')">&lt;</span>
-    <span class="data" @click="$emit('openMonthsPopup')">{{ months[currentMonth] }}</span>
-    <span class="data" @click="$emit('openYearPopup')">{{ currentYear }}</span>
+    <span class="data" :key="months[currentMonth]" @click="$emit('openMonthsPopup')">{{ months[currentMonth] }}</span>
+    <span class="data" :key="currentYear" @click="$emit('openYearPopup')">{{ currentYear }}</span>
     <span class="btn" @click="$emit('nextMonth')">&gt;</span>
   </header>
 </template>

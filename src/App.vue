@@ -24,9 +24,6 @@
           @changeCurrentYear="changeCurrentYear"
         />
         <appMain 
-          :days="days"
-          :startFrom="startFrom"
-          :countOfDays="countOfDays"
           :currentMonth="currentMonth" 
           :currentYear="currentYear"
         />
@@ -52,8 +49,6 @@ export default {
   data: () => ({
     currentMonth: new Date().getMonth(),
     currentYear: new Date().getFullYear(),
-
-    days: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
 
     months: [
       'January', 'February', 'March', 'April',
@@ -122,15 +117,6 @@ export default {
   },
 
   computed: {
-    startFrom() {
-      const day = new Date(this.currentYear, this.currentMonth).getDay()
-      return day === 0 ? 6 : day - 1
-    },
-
-    countOfDays() {
-      return new Date(this.currentYear, this.currentMonth + 1, -1).getDate() + 1
-    },
-
     currentBackground() {
       return this.backgrounds[Math.floor((this.currentMonth + 1) / 3) % 4]
     }
@@ -152,7 +138,8 @@ body {
 
 #app {
   width: 100vw;
-  min-height: -webkit-fill-available;
+  height: -webkit-fill-available;
+  min-height: 90vh;
   display: flex;
   font-size: 22px;
   transition: .7s;

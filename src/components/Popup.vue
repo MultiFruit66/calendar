@@ -2,16 +2,12 @@
   <div class="popup">
     <div class="yearPopup" v-show="yearPopup">
       <span>Year:</span>
-      <input type="number" min="0" step="1" 
-        :value="currentYear"
-        @change="changeYear"
-      />
+      <input type="number" :value="currentYear" @change="changeYear"/>
     </div>
     <ul class="monthsList" v-show="monthsPopup">
       <li class="month" 
-        v-for="(month, index) in months" :key="`a${ index }`"
-        :ref="`month:${index}`"
-        @click="changeMonth"
+        v-for="(month, index) in months" :key="`${ index }`"
+        @click="$emit('changeCurrentMonth', index)"
       >
         {{ month }}
       </li>
@@ -31,14 +27,6 @@ export default {
   },
 
   methods: {
-    changeMonth(e) {
-      this.months.forEach((month, index) => {
-        if (month === e.target.innerText) {
-          this.$emit('changeCurrentMonth', index)
-        }
-      })
-    },
-
     changeYear(e) {
       const year = Number(e.target.value)
       this.$emit('changeCurrentYear', year)
@@ -68,6 +56,13 @@ input {
   border: 1px solid #000;
   text-align: center;
   margin-left: 10px;
+  outline: none;
+
+  &[type=number]::-webkit-inner-spin-button, 
+  &[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0;
+  }
 }
 
 .monthsList {
