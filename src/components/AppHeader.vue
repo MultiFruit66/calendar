@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 header {
   border-radius: 10px 10px 0 0;
   padding: 20px;

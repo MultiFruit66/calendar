@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'Popup',
+  name: 'popup-menu',
 
   props: {
     yearPopup: Boolean,
@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .popup {
   position: absolute;
   top: 0;

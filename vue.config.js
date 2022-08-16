@@ -1,3 +1,4 @@
-module.exports = {
-  publicPath: "calendar"
-} 
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+  transpileDependencies: true
+})

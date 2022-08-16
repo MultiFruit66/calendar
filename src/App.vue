@@ -15,7 +15,7 @@
         @nextMonth="nextMonth"
       />
       <main>
-        <popup 
+        <popupMenu
           :months="months"
           :monthsPopup="monthsPopup"
           :yearPopup="yearPopup"
@@ -35,7 +35,7 @@
 <script>
 import AppHeader from './components/AppHeader'
 import AppMain from './components/AppMain'
-import Popup from './components/Popup'
+import PopupMenu from './components/PopupMenu'
 
 export default {
   name: 'App',
@@ -43,7 +43,7 @@ export default {
   components: {
     AppHeader,
     AppMain,
-    Popup
+    PopupMenu
   },
 
   data: () => ({
@@ -144,7 +144,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="less">
 body {
   margin: 0;
 }
