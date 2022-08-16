@@ -152,7 +152,7 @@ body {
 #app {
   width: 100vw;
   height: -webkit-fill-available;
-  min-height: 90vh;
+  min-height: 100vh;
   display: flex;
   font-size: 22px;
   transition: .7s;

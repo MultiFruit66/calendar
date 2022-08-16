@@ -36,6 +36,7 @@ header {
 .data {
   width: 110px;
   text-align: center;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -48,6 +49,7 @@ header {
 
 .btn {
   width: 40px;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.6);

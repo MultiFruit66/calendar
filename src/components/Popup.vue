@@ -76,6 +76,7 @@ input {
 .month {
   margin: auto;
   width: 30%;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
